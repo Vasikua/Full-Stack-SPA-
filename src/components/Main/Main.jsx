@@ -13,6 +13,7 @@ export default function Main() {
         <Flex alignItems={"center"}>
           <Button color={"black"} bg={"blue.300"} ml={"4"}>
             Add new transaction
+            {/* aff somthing */}
           </Button>
         </Flex>
       </Flex>
