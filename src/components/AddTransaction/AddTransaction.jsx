@@ -13,8 +13,22 @@ import {
   ModalFooter,
   Button,
 } from "@chakra-ui/react";
+import { useContext } from "react";
+import { GlobalContext } from "../Contex/Contex";
 
 export default function AddTransaction({ isOpen, onClose }) {
+  const { formData, setFormData, value, setValue } = useContext(GlobalContext);
+
+  function handleFormChange(e) {
+    setFormData({
+      ...FormData,
+      [e.target.name]: e.target.value,
+    });
+  }
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    handleFormSubmit(formData);
+  }
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <form>
@@ -40,10 +54,22 @@ export default function AddTransaction({ isOpen, onClose }) {
               />
             </FormControl>
             <RadioGroup mt="5">
-              <Radio value="income" colorScheme="blue" name="type">
+              <Radio
+                checked={FormData.type === "income"}
+                value="income"
+                colorScheme="blue"
+                name="type"
+                onChange={handleFormChange}
+              >
                 Income
               </Radio>
-              <Radio value="expense" colorScheme="red" name="type">
+              <Radio
+                checked={FormData.type === "expense"}
+                value="expense"
+                colorScheme="red"
+                name="type"
+                onChange={handleFormChange}
+              >
                 Expense
               </Radio>
             </RadioGroup>
